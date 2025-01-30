@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radar Maracaju</title>
     <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: #f4f4f4;
             display: flex;
             flex-direction: column;
@@ -22,174 +18,68 @@
             color: white;
             text-align: center;
             padding: 1rem;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
-            z-index: 10;
-        }
-        nav {
-            background-color: #444;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            z-index: 9;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            margin: 0 10px;
-            font-weight: bold;
-        }
-        nav a:hover {
-            background-color: #b22222;
-            border-radius: 5px;
         }
         .main-content {
-            display: flex;
-            margin-top: 120px;
-            justify-content: space-between;
-            padding: 20px;
-            gap: 20px;
+            width: 80%;
+            margin: 20px auto;
         }
-        .content-left, .content-right {
-            width: 48%;
-        }
-        .weather, .news-section {
+        .weather {
             background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-left: 5px solid #b22222;
+        }
+        .form-container, .newsletter, .partners, .search-bar, .map {
+            background-color: white;
             padding: 15px;
             margin-bottom: 15px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .news-section img {
-            max-width: 100%;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .accordion {
-            background-color: #f4f4f4;
+        .search-bar input {
+            width: 80%;
             padding: 10px;
-            margin: 10px 0;
-            cursor: pointer;
-            width: 100%;
-            text-align: left;
-            border: none;
-            outline: none;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
-        .accordion:hover {
+        .search-bar button {
+            padding: 10px;
+            font-size: 1rem;
             background-color: #b22222;
             color: white;
-        }
-        .panel {
-            padding: 10px;
-            display: none;
-            background-color: #f1f1f1;
-            margin-top: 5px;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
         }
-        .sidebar {
-            width: 20%;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-        }
-        .sidebar h3 {
-            margin-bottom: 15px;
-            color: #b22222;
-        }
-        .sidebar ul {
-            list-style: none;
-        }
-        .sidebar ul li {
-            margin-bottom: 10px;
-        }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #444;
-        }
-        .sidebar ul li a:hover {
-            color: #b22222;
-        }
-        .footer {
-            background-color: #444;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        .footer a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        .carousel {
+        .newsletter form {
             display: flex;
-            overflow-x: scroll;
-            gap: 15px;
+            flex-direction: column;
         }
-        .carousel img {
-            width: 300px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-        }
-        .carousel-button {
-            background-color: #b22222;
-            color: white;
-            padding: 10px 20px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
+        .newsletter input[type="email"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .carousel-button:hover {
-            background-color: #a11e1e;
+        .partners {
+            display: flex;
+            justify-content: space-between;
         }
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
+        .partners img {
+            width: 100px;
+            height: auto;
+        }
+        .map iframe {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            padding-top: 60px;
-        }
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 5px;
-            width: 50%;
-        }
-        .modal-close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .modal-close:hover,
-        .modal-close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+            height: 450px;
+            border: 0;
         }
     </style>
 </head>
@@ -197,60 +87,56 @@
     <header>
         Radar Maracaju
     </header>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Notícias</a>
-        <a href="#">Previsão do Tempo</a>
-        <a href="#" onclick="openModal()">Contato</a>
-    </nav>
     <div class="main-content">
-        <div class="content-left">
-            <div class="weather" id="weather-container">Carregando previsão do tempo...</div>
-            <!-- Primeira notícia -->
-            <div class="news-section">
-                <h2>Notícia em Destaque</h2>
-                <img src="https://www.maracajuemfoco.com.br/assets/img/thumbs/64766.jpg" alt="Vereador Vilmar">
-                <p><strong>Vereador Vilmar da Era do Gelo cobra recapeamento e melhorias para vias de Maracaju</strong></p>
-                <p>O vereador Vilmar da Era do Gelo usou a tribuna da Câmara Municipal para cobrar o recapeamento de várias ruas da cidade e melhorias nas vias urbanas...</p>
-                <a href="https://www.maracajuemfoco.com.br/noticia/vereador-vilmar-da-era-do-gelo-cobra-recapeamento-e-melhorias-para-vias-de-maracaju/64766" target="_blank">Leia mais</a>
-            </div>
-            <!-- Carrossel de imagens -->
-            <h3>Imagens em Destaque</h3>
-            <div class="carousel">
-                <img src="https://www.maracajuemfoco.com.br/assets/img/thumbs/64766.jpg" alt="Imagem 1">
-                <img src="https://www.maracajuemfoco.com.br/assets/img/thumbs/64770.jpg" alt="Imagem 2">
-                <img src="https://www.maracajuemfoco.com.br/assets/img/thumbs/64773.jpg" alt="Imagem 3">
-            </div>
-            <button class="carousel-button">Ver Mais</button>
-        </div>
+        <!-- Previsão do Tempo -->
+        <div class="weather" id="weather-container">Carregando previsão do tempo...</div>
 
-        <div class="sidebar">
-            <h3>Links Rápidos</h3>
-            <ul>
-                <li><a href="#">Notícias de Maracaju</a></li>
-                <li><a href="#">Serviços Públicos</a></li>
-                <li><a href="#">Calendário de Eventos</a></li>
-                <li><a href="#">História de Maracaju</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>© 2025 Radar Maracaju | Todos os direitos reservados</p>
-        <a href="#">Política de Privacidade</a> | <a href="#">Termos de Serviço</a>
-    </div>
-
-    <!-- Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <h3>Entre em Contato</h3>
+        <!-- Formulário de Newsletter -->
+        <div class="newsletter">
+            <h3>Assine nossa Newsletter</h3>
             <form action="#" method="POST">
-                <input type="text" name="nome" placeholder="Seu Nome" required>
-                <input type="email" name="email" placeholder="Seu E-mail" required>
-                <textarea name="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
-                <button type="submit">Enviar Mensagem</button>
+                <input type="email" name="email" placeholder="Seu e-mail" required>
+                <button type="submit">Assinar</button>
             </form>
+        </div>
+
+        <!-- Barra de Pesquisa -->
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Pesquisar notícias...">
+            <button onclick="searchNews()">Pesquisar</button>
+        </div>
+
+        <!-- Mapa Interativo -->
+        <div class="map">
+            <h3>Mapa de Maracaju</h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d182838.85512339402!2d-55.19948747268672!3d-21.611743984749702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x949c397d4a4c31a7%3A0x7e9d8570c79e5ee2!2sMaracaju%2C%20MS!5e0!3m2!1spt-BR!2sbr!4v1640728328629!5m2!1spt-BR!2sbr" loading="lazy"></iframe>
+        </div>
+
+        <!-- Notícias -->
+        <div class="news">
+            <h2>Notícias Recentes</h2>
+            <div class="news-item">
+                <h3>Vereador Vilmar da Era do Gelo cobra recapeamento e melhorias para vias de Maracaju</h3>
+                <p>O vereador Vilmar da Era do Gelo está solicitando ao poder público o recapeamento e melhorias nas vias de Maracaju...</p>
+                <a href="https://www.maracajuemfoco.com.br/noticia/vereador-vilmar-da-era-do-gelo-cobra-recapeamento-e-melhorias-para-vias-de-maracaju/64766">Leia mais</a>
+            </div>
+            <div class="news-item">
+                <h3>Notícia 2</h3>
+                <p>Descrição da segunda notícia...</p>
+                <a href="#">Leia mais</a>
+            </div>
+            <div class="news-item">
+                <h3>Notícia 3</h3>
+                <p>Descrição da terceira notícia...</p>
+                <a href="#">Leia mais</a>
+            </div>
+        </div>
+
+        <!-- Seção de Parceiros -->
+        <div class="partners">
+            <div><img src="https://via.placeholder.com/100" alt="Parceiro 1"></div>
+            <div><img src="https://via.placeholder.com/100" alt="Parceiro 2"></div>
+            <div><img src="https://via.placeholder.com/100" alt="Parceiro 3"></div>
         </div>
     </div>
 
@@ -267,12 +153,10 @@
         }
         getWeather();
 
-        // Modal
-        function openModal() {
-            document.getElementById("myModal").style.display = "block";
-        }
-        function closeModal() {
-            document.getElementById("myModal").style.display = "none";
+        // Função para pesquisa de notícias (apenas um exemplo simples)
+        function searchNews() {
+            const query = document.getElementById("search").value;
+            alert("Buscando por: " + query);
         }
     </script>
 </body>
